@@ -30,38 +30,62 @@ function AddNewInterview() {
     const router = useRouter()
     const {user} = useUser();
 
-    const onSubmit=async(e)=>{
-      setLoading(true)
-        e.preventDefault()
-        console.log(jobPosition,jobDesc,jobExp)
-
-        const InputPrompt="Job position: "+jobPosition+", Job Description: "+jobDesc+", Years of Experience: "+jobExp+", Based on this give 5 interview questions along with answers in json.Don't have any text in bold"
-        const result=await chatSession.sendMessage(InputPrompt)
-        const MockJsonResp = (result.response.text()).replace('```json',' ').replace('```',' ')
-        console.log(JSON.parse(MockJsonResp))
-        setJsonResponse(MockJsonResp)
-        if(MockJsonResp){
-        const resp = await db.insert(MockMate)
-        .values({
-          mockId:uuidv4(),
-          jsonMockResp:MockJsonResp,
-          jobPosition:jobPosition,
-          jobDesc:jobDesc,
-          jobExp:jobExp,
-          createdBy:user?.primaryEmailAddress?.emailAddress,
-          createdAt:moment().format('DD-MM-yyyy')
-        }).returning({mockId:MockMate.mockId})
-        console.log("Inserted ID:",resp)
-        if(resp){
-          setOpenDialog(false)
-          router.push('/dashboard/interview/'+resp[0]?.mockId)
+    const onSubmit = async (e) => {
+      setLoading(true);
+      e.preventDefault();
+      console.log(jobPosition, jobDesc, jobExp);
+    
+      const InputPrompt = "Job position: " + jobPosition + ", Job Description: " + jobDesc + ", Years of Experience: " + jobExp + ", Based on this give 5 interview questions along with answers in json. Don't have any text in bold";
+      
+      try {
+        const result = await chatSession.sendMessage(InputPrompt);
+        const rawText = result.response.text();
+    
+        // Clean and strip the code block markers
+        const MockJsonResp = rawText.replace('```json', '').replace('```', '').trim();
+    
+        // Try parsing the JSON safely
+        let parsedResponse = [];
+    
+        try {
+          parsedResponse = JSON.parse(MockJsonResp);
+          console.log(parsedResponse);
+          setJsonResponse(parsedResponse);
+        } catch (jsonError) {
+          console.error("Error parsing JSON: ", jsonError, "Raw response: ", MockJsonResp);
+          setJsonResponse([]); // Handle the error by setting a fallback empty response
         }
+    
+        if (parsedResponse.length > 0) {
+          const resp = await db.insert(MockMate)
+            .values({
+              mockId: uuidv4(),
+              jsonMockResp: MockJsonResp,
+              jobPosition,
+              jobDesc,
+              jobExp,
+              createdBy: user?.primaryEmailAddress?.emailAddress,
+              createdAt: moment().format('DD-MM-yyyy')
+            })
+            .returning({ mockId: MockMate.mockId });
+    
+          console.log("Inserted ID:", resp);
+          if (resp) {
+            setOpenDialog(false);
+            router.push('/dashboard/interview/' + resp[0]?.mockId);
+          }
+        } else {
+          console.error("Invalid JSON response or empty questions.");
+        }
+    
+      } catch (err) {
+        console.error("Error during chat session or database operation: ", err);
+        setJsonResponse([]); // Fallback to empty response in case of any other error
+      } finally {
+        setLoading(false);
       }
-      else{
-        console.log("ERROR")
-      }
-        setLoading(false)
-    }
+    };
+    
 
   return (
     <div>
