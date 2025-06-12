@@ -5,6 +5,12 @@
 
 ---
 
+## 📸 Preview
+
+![MockMate Preview](public/web2.jpg)
+
+---
+
 ## 🚀 Features
 
 - 🔒 **Authentication** — Secure login system
@@ -78,11 +84,6 @@ OPENAI_API_KEY=your-openai-api-key
 
 ---
 
-## 📸 Preview
-
-![MockMate Preview](public/web2.jpg)
-
----
 
 ## 🤝 About the Creator
 
