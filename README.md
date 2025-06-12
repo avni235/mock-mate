@@ -23,7 +23,7 @@
 | **Frontend**| Next.js, Tailwind CSS    |
 | **Backend** | Next.js API Routes       |
 | **Database**| PostgreSQL               |
-| **ORM**     | Drizzle |
+| **ORM**     | Drizzle 
 | **Hosting** | Vercel, Neon (DB)        |
 
 ---
@@ -80,7 +80,7 @@ OPENAI_API_KEY=your-openai-api-key
 
 ## 📸 Preview
 
-![MockMate Preview](public/preview.png)
+![MockMate Preview](public/web2.jpg)
 
 ---
 
