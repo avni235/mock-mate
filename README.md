@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# MockMate 🎙️
 
-First, run the development server:
+**MockMate** is a fullstack mock interview platform built using **Next.js**, **PostgreSQL**, and **Tailwind CSS**. It simulates real-world interview experiences using AI-generated questions, tracks user progress, and provides an interactive, secure environment for self-evaluation.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Features
+
+- 🔒 **Authentication** — Secure login system
+- 🧠 **AI-Driven Questions** — Dynamically generated based on role and skill
+- 📈 **Progress Tracking** — Analyze and review past interview attempts
+- ⚙️ **Fully Responsive UI** — Built with Tailwind CSS
+- 🧩 **Modular Architecture** — Clean, scalable file structure
+- 🌐 **Deployed on Vercel**
+
+---
+
+## 🧱 Tech Stack
+
+| Layer       | Tech                     |
+|-------------|--------------------------|
+| **Frontend**| Next.js, Tailwind CSS    |
+| **Backend** | Next.js API Routes       |
+| **Database**| PostgreSQL               |
+| **ORM**     | Drizzle |
+| **Hosting** | Vercel, Neon (DB)        |
+
+---
+
+## 📂 Project Structure
+
+```
+mockmate/
+├── app/ or pages/       # Next.js routes
+├── components/          # Reusable UI components
+├── lib/                 # Helpers, utils, DB config
+├── prisma/              # Prisma schema (if used)
+├── styles/              # Tailwind configs / globals
+├── public/              # Static assets
+└── .env                 # Environment variables
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🛠️ Local Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+# Clone the repo
+git clone https://github.com/avni235/mock-mate.git
+cd mock-mate
 
-## Learn More
+# Install dependencies
+npm install
 
-To learn more about Next.js, take a look at the following resources:
+# Create a .env file and add DB URL, etc.
+cp .env.example .env
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Run locally
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🧪 Environment Variables (example)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```env
+DATABASE_URL=postgresql://username:password@host:port/dbname
+NEXTAUTH_SECRET=your-secret-key
+OPENAI_API_KEY=your-openai-api-key
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## 🔗 Live Demo
+
+👉 [https://mock-mate-ten.vercel.app](https://mock-mate-ten.vercel.app)
+
+---
+
+## 📸 Preview
+
+![MockMate Preview](public/preview.png)
+
+---
+
+## 🤝 About the Creator
+
+Hi! I'm **Avneet Kaur**, a full-stack developer passionate about building useful tools with Next.js, PostgreSQL, and AI.  
+Feel free to connect with me:
+
+- 🌐 [Portfolio](https://avneet-kaur.framer.website)
+- 💼 [LinkedIn](https://linkedin.com/in/avneet-kaur2)
+
+---
